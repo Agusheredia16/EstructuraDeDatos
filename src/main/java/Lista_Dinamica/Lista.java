@@ -1,0 +1,133 @@
+package Lista_Dinamica;
+/*
+@author agush
+ */
+public class Lista {
+
+    private Nodo cabecera;
+
+    public Lista() {
+        this.cabecera = null;
+    }
+
+    public boolean insertar(Object elemento, int posicion) {
+        //Inserta el nuevo elemento en la posicion pos
+        //Detecta y reporta error posicion invalida
+        boolean exito = true;
+        if (posicion < 1 || posicion > this.longitud() + 1) {
+            exito = false;
+        } else {
+            if (posicion == 1) { //crea un nuevo nodo y se enlaza en la cabecera
+                this.cabecera = new Nodo(elemento, this.cabecera);
+            } else { //avanza hasta el elemento pos - 1
+                Nodo aux = this.cabecera;
+                int i = 1;
+                while (i < posicion - 1) {
+                    aux = aux.getEnlace();
+                    i++;
+                }
+                //Crea el nodo y lo enlaza
+                Nodo nuevo = new Nodo(elemento, aux.getEnlace());
+                aux.setEnlace(nuevo);
+            }
+        }
+        //Nunca hay error de lista llena, entonces devuelve true
+        return exito;
+    }
+
+    public boolean eliminar(int posicion) {
+        boolean exito = true;
+        if (posicion < 1 || posicion > this.longitud()) {
+            exito = false;
+        } else {
+            if (posicion == 1) {
+                cabecera = cabecera.getEnlace();
+            } else {
+                Nodo aux = cabecera;
+                int i = 1;
+                while (i < posicion - 1) {
+                    aux = aux.getEnlace();
+                    i++;
+                }
+                aux.setEnlace(aux.getEnlace().getEnlace());
+            }
+        }
+        return exito;
+    }
+
+    public Object recuperar(int posicion) {
+        Object elemento = null;
+        Nodo aux;
+        if (posicion >= 1 && posicion <= longitud()) {
+            aux = cabecera;
+            int i = 1;
+            while (i != posicion) {
+                aux = aux.getEnlace();
+                i++;
+            }
+            elemento = aux.getElemento();
+        }
+        return elemento;
+    }
+
+    public int localizar(Object elemento) {
+        int posicion = -1;
+        Nodo aux = cabecera;
+        int i = 1;
+        while (aux.getElemento() != elemento || i <= longitud()) {
+            aux = aux.getEnlace();
+            i++;
+        }
+        if (i <= longitud()) {
+            posicion = i;
+        }
+        return posicion;
+    }
+
+    public int longitud() {
+        Nodo aux = cabecera;
+        int contador = 0;
+        while (aux != null) {
+            aux = aux.getEnlace();
+            contador++;
+        }
+        return contador;
+    }
+
+    public void vaciar() {
+        cabecera = null;
+    }
+
+    public boolean esVacia() { // Partir de la base :3
+        boolean resultado = true;
+        if (cabecera != null) {
+            resultado = false;
+        }
+        return resultado;
+    }
+
+    public Lista clonar() {
+        Lista copia = new Lista();
+        Nodo aux = cabecera;
+        int i = 1;
+        while (aux != null) {
+            copia.insertar(aux.getElemento(), i);
+            aux = aux.getEnlace();
+            i++;
+        }
+        return copia;
+    }
+
+    @Override
+    public String toString() {
+        String texto = "[";
+        int i = 1;
+        while (i < longitud()) {
+            texto = texto + recuperar(i) + ", ";
+            i++;
+        }
+        texto = texto + recuperar(i) + "]";
+        return texto;
+    }
+    
+}

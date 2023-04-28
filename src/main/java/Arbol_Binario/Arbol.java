@@ -80,7 +80,7 @@ public class Arbol {
         if (esVacio()) {
             altura = 0;
         } else {
-            altura = determinarAltura(raiz, 1, 1);
+            altura = determinarAltura(raiz, 0, 0);
         }
         return altura;
     }

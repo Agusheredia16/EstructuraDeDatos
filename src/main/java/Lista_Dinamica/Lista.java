@@ -130,4 +130,24 @@ public class Lista {
         return texto;
     }
     
+    public Lista obtenerMultiplos(int num){
+        //Ejercicio de Simulacro de parcial. INCOMPLETO
+        
+        Lista listaMult = new Lista();
+        Nodo aux = cabecera;
+        int contador = 1;
+        while(aux != null){
+            if (contador % num == 0) {
+                if (listaMult.cabecera == null) {
+                    listaMult.cabecera = aux;
+                }
+                listaMult.cabecera.setEnlace(Nodo newNodo = );
+                listaMult.cabecera = newNodo;
+            }
+            aux = aux.getEnlace();
+            contador++;
+        }
+        return listaMult;
+    }
+    
 }

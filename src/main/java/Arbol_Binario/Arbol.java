@@ -10,7 +10,7 @@ import Cola_Dinamica.Nodo;
 public class Arbol {
 
     //Atributos
-    private NodoArb raiz;
+    public NodoArb raiz;
 
     public Arbol() {
         this.raiz = null;
@@ -102,12 +102,79 @@ public class Arbol {
     }
 
     public int nivel(Object elem) {
-       
-        
-        return 1;
+        int n = -1;
+        NodoArb aux = raiz;
+        while (obtenerNodo(aux, elem) != null) {
+            if (obtenerNodo(aux.getIzq(), elem) != null) {
+                aux = aux.getIzq();
+            } else {
+                aux = aux.getDer();
+            }
+            n++;
+        }
+        return n;
     }
 
-    private NodoArb obtenerNodo(NodoArb n, Object buscado) {
+    public void vaciar() {
+        raiz = null;
+    }
+
+    public Arbol clonar() {
+        Arbol newArbol = new Arbol();
+        newArbol.raiz = raiz;
+
+        clonarArb(newArbol.raiz, raiz);
+        return newArbol;
+    }
+
+    private void clonarArb(NodoArb nodoC, NodoArb nodoO) {
+        if (nodoO.getIzq() != null) {
+            nodoC.setIzq(nodoO.getIzq());
+            clonarArb(nodoC.getIzq(), nodoO.getIzq());
+        }
+        if (nodoO.getDer() != null) {
+            nodoC.setDer(nodoO.getDer());
+            clonarArb(nodoC.getDer(), nodoO.getDer());
+        }
+    }
+
+    public String toString() {
+        String texto = "El arbol esta vacio";
+
+        if (this.raiz != null) {
+            texto = auxToString(this.raiz);
+        }
+        return texto;
+    }
+
+    private String auxToString(NodoArb nodo) {
+        String texto = "";
+
+        texto = "Nodo: " + nodo.getElemento();
+        //HI
+        if (nodo.getIzq() != null) {
+            texto += "\nHI: " + nodo.getIzq().getElemento();
+        }else{
+            texto += "\nHI: -";
+        }
+        //HD
+        if (nodo.getDer() != null) {
+            texto += " HD: " + nodo.getDer().getElemento() + "\n";
+        }else{
+            texto += "HD: -" + "\n";
+        }
+        
+        if (nodo.getIzq() != null) {
+            texto = texto + auxToString(nodo.getIzq());
+        }
+        if (nodo.getDer() != null) {
+            texto = texto + auxToString(nodo.getDer());
+        }
+
+        return texto;
+    }
+
+    public NodoArb obtenerNodo(NodoArb n, Object buscado) {
         //Metodo PRIVADO que busca un elemento y devuelve el nodo que lo
         //contiene, si no se encuentra devuelve null
         NodoArb resultado = null;
@@ -155,19 +222,18 @@ public class Arbol {
     private void listarNivelesAux(NodoArb nodo, Lista lis) {
 
     }
-    
+
     //Recorridos
-    
-    public void porNiveles(){
+    public void porNiveles() {
         Cola cola = new Cola();
         cola.poner(this.raiz);
         Nodo nodoAct = cola.obtenerNodoIni();
-        
-        while(!cola.esVacia()){
+
+        while (!cola.esVacia()) {
             cola.poner(nodoAct);
-            
+
         }
-        
+
     }
-    
+
 }

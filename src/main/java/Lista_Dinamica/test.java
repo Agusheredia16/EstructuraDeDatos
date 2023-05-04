@@ -6,14 +6,15 @@ package Lista_Dinamica;
 public class test {
 
     public static void main(String[] args) {
+        
         Lista testLista = new Lista();
 
-        System.out.println(testLista.insertar("x", 1));
-        System.out.println(testLista.insertar("3", 2));
-        System.out.println(testLista.insertar(".", 3));
-        System.out.println(testLista.insertar("-", 4));
+        System.out.println(testLista.insertar("a", 1));
+        System.out.println(testLista.insertar("b", 2));
+        System.out.println(testLista.insertar("c", 3));
+        System.out.println(testLista.insertar("d", 4));
 
-        System.out.println(testLista.toString());
+        System.out.println(testLista.obtenerMultiplos(2));
     }
 
 }

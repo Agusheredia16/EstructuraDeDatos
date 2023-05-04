@@ -10,9 +10,9 @@ public class NodoArb {
     
     //Constructor
     public NodoArb(Object elemento, NodoArb izq, NodoArb der){
-        this.elemento = null;
-        this.izq = null;
-        this.der = null;
+        this.elemento = elemento;
+        this.izq = izq;
+        this.der = der;
     }
     
     //Observadores

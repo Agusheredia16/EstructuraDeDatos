@@ -6,15 +6,11 @@ package Arbol_Binario;
 public class test {
 
     public static void main(String[] args) {
-        Arbol unArbol = new Arbol();
+        Arbol arb1 = new Arbol();
+        Arbol arb2 = new Arbol();
         
-
-        unArbol.insertar('a', null, 'D');
-        unArbol.insertar('b', 'a', 'I');
-        unArbol.insertar('c', 'a', 'D');
         
-
-        System.out.println(unArbol.toString());
+        
         
     }
 

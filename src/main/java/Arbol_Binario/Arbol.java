@@ -10,7 +10,7 @@ import Cola_Dinamica.Nodo;
 public class Arbol {
 
     //Atributos
-    public NodoArb raiz;
+    private NodoArb raiz;
 
     public Arbol() {
         this.raiz = null;
@@ -154,16 +154,16 @@ public class Arbol {
         //HI
         if (nodo.getIzq() != null) {
             texto += "\nHI: " + nodo.getIzq().getElemento();
-        }else{
+        } else {
             texto += "\nHI: -";
         }
         //HD
         if (nodo.getDer() != null) {
             texto += " HD: " + nodo.getDer().getElemento() + "\n";
-        }else{
+        } else {
             texto += "HD: -" + "\n";
         }
-        
+
         if (nodo.getIzq() != null) {
             texto = texto + auxToString(nodo.getIzq());
         }
@@ -234,6 +234,26 @@ public class Arbol {
 
         }
 
+    }
+
+    //Modulos de parcial
+    public boolean equalss(Arbol arb2) {
+        boolean resultado = false;
+
+        resultado = iguales(this.raiz, arb2.raiz);
+
+        return resultado;
+    }
+
+    private boolean iguales(NodoArb nodo1, NodoArb nodo2) {
+        boolean result = false;
+        
+        if (nodo1 != null && nodo2 != null) {
+            if
+        }
+
+        
+        return result;
     }
 
 }

@@ -130,6 +130,10 @@ public class Lista {
         return texto;
     }
     
+    
+    
+    //Modulos de parciales
+    
     public Lista obtenerMultiplos(int num){
         //Ejercicio de Simulacro de parcial. INCOMPLETO
         
@@ -150,4 +154,13 @@ public class Lista {
         return listaMult;
     }
     
+    
+    public void agregarElem(Object nuevo, int x){
+        
+        Nodo aux = this.cabecera;
+        
+        while(aux != null){
+            
+        }
+    }
 }

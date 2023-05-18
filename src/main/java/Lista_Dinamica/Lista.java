@@ -145,8 +145,8 @@ public class Lista {
                 if (listaMult.cabecera == null) {
                     listaMult.cabecera = aux;
                 }
-                listaMult.cabecera.setEnlace(Nodo newNodo = );
-                listaMult.cabecera = newNodo;
+                //listaMult.cabecera.setEnlace(Nodo newNodo = );
+                //listaMult.cabecera = newNodo;
             }
             aux = aux.getEnlace();
             contador++;

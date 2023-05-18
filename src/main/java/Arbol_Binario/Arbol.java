@@ -238,10 +238,8 @@ public class Arbol {
 
     //Modulos de parcial
     public boolean equalss(Arbol arb2) {
-        boolean resultado = false;
-
+        boolean resultado;
         resultado = iguales(this.raiz, arb2.raiz);
-
         return resultado;
     }
 
@@ -249,7 +247,7 @@ public class Arbol {
         boolean result = false;
         
         if (nodo1 != null && nodo2 != null) {
-            if
+            //if
         }
 
         

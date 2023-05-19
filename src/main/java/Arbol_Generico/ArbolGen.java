@@ -111,7 +111,7 @@ public class ArbolGen {
             }
             if (elemPadre == null) {//Recursivo, busco entre los hijos de los hijos hasta encontrarlo
                 nodoAux = nodo.getHijoIzq();
-                while(elemPadre == null && nodoAux != null){
+                while (elemPadre == null && nodoAux != null) {
                     elemPadre = padreAux(elemento, nodoAux);
                     nodoAux = nodoAux.getHermanoDer();
                 }
@@ -144,7 +144,7 @@ public class ArbolGen {
     public int nivel(Object buscado) {
         int nivel = -1;
 
-        if (raiz != null) {
+        if (!esVacio() && buscado != null) {
             nivel = nivelAux(raiz, buscado, 0);
         }
 
@@ -158,13 +158,15 @@ public class ArbolGen {
             if (nodo.getElemento().equals(buscado)) {
                 nivel = profundidad;
             } else {
-                nivel = nivelAux(nodo.getHijoIzq(), buscado, profundidad + 1);
+                if (nodo.getHijoIzq() != null) { // Verificar si el hijo izquierdo no es nulo
+                    nivel = nivelAux(nodo.getHijoIzq(), buscado, profundidad + 1);
 
-                if (nivel == -1) {
-                    NodoGen hermano = nodo.getHijoIzq().getHermanoDer();
-                    while (hermano != null && nivel == -1) {
-                        nivel = nivelAux(hermano, buscado, profundidad + 1);
-                        hermano = hermano.getHermanoDer();
+                    if (nivel == -1) {
+                        NodoGen hermano = nodo.getHijoIzq().getHermanoDer();
+                        while (hermano != null && nivel == -1) {
+                            nivel = nivelAux(hermano, buscado, profundidad + 1);
+                            hermano = hermano.getHermanoDer();
+                        }
                     }
                 }
             }

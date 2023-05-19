@@ -175,31 +175,35 @@ public class ArbolGen {
         return nivel;
     }
 
-    public Lista ancestros(Object elem) {
-        Lista ancestros = new Lista();
-        buscarAncestros(raiz, elem, ancestros);
-        return ancestros;
+    public Lista ancestros(Object elemento) {
+        Lista lista = new Lista();
+        if (!esVacio()) {
+            ancestrosAux(raiz, elemento, lista);
+        }
+        return lista;
     }
 
-    private boolean buscarAncestros(NodoGen nodo, Object elem, Lista ancestros) {
-        boolean encontrado = false;
+    private boolean ancestrosAux(NodoGen raiz, Object elemento, Lista lista) {
+        boolean valor = false;
+        if (raiz != null) {
 
-        if (nodo != null) {
-            if (nodo.getElemento().equals(elem)) {
-                encontrado = true;
+            if (raiz.getElemento().equals(elemento)) {
+                lista.insertar(raiz.getElemento(), 1);
+                valor = true;
             } else {
-                encontrado = buscarAncestros(nodo.getHijoIzq(), elem, ancestros);
-                if (!encontrado) {
-                    encontrado = buscarAncestros(nodo.getHermanoDer(), elem, ancestros);
-                }
-            }
+                NodoGen aux = raiz.getHijoIzq();
 
-            if (encontrado) {
-                ancestros.insertar(nodo.getElemento(), 1);
+                while (aux != null && !valor) {
+                    valor = valor || ancestrosAux(aux, elemento, lista);
+                    aux = aux.getHermanoDer();
+                }
+                if (valor) {
+                    lista.insertar(raiz.getElemento(), 1);
+                }
             }
         }
 
-        return encontrado;
+        return valor;
     }
 
     public void vaciar() {

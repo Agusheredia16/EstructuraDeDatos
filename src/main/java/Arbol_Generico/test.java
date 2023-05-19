@@ -1,5 +1,7 @@
 package Arbol_Generico;
 
+import Lista_Dinamica.Lista;
+
 /*
 @author agush
  */
@@ -25,17 +27,19 @@ public class test {
 
         arb.insertar("pi", "especiales");
         arb.insertar("e", "especiales");
-        
-        arb.nivel("numeros");
-        
-        
-        System.out.println(arb.altura());
 
+        //arb.nivel("asd");
+
+        Lista lista;
+        lista = arb.ancestros(5);
+        System.out.println(lista);
+
+        //System.out.println(arb.nivel("a"));
         /* System.out.println(arb.pertenece("miel"));
         System.out.println(arb.pertenece("e"));
         System.out.println(arb.pertenece("numeros")); */
         //System.out.println(arb.padre("miel"));
-       // System.out.println(arb.padre(5));
+        // System.out.println(arb.padre(5));
         // System.out.println(arb.toString());
     }
 

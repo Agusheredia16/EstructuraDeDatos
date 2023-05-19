@@ -194,7 +194,9 @@ public class ArbolGen {
                 NodoGen aux = raiz.getHijoIzq();
 
                 while (aux != null && !valor) {
-                    valor = valor || ancestrosAux(aux, elemento, lista);
+                    if (valor || ancestrosAux(aux, elemento, lista)) {
+                        valor = true;
+                    }
                     aux = aux.getHermanoDer();
                 }
                 if (valor) {

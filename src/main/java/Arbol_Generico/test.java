@@ -27,13 +27,21 @@ public class test {
 
         arb.insertar("pi", "especiales");
         arb.insertar("e", "especiales");
+        
+        
+        
+        
+        
+        //Lista lista = arb.listarPreorden();
+        //System.out.println(lista.toString());
+        
+        //ArbolGen arbCopia = arb.clonar();
+        //System.out.println(arbCopia.toString());
 
         //arb.nivel("asd");
-
-        Lista lista;
-        lista = arb.ancestros(5);
-        System.out.println(lista);
-
+        //Lista lista;
+        //lista = arb.ancestros(5);
+        //System.out.println(lista);
         //System.out.println(arb.nivel("a"));
         /* System.out.println(arb.pertenece("miel"));
         System.out.println(arb.pertenece("e"));

@@ -208,9 +208,59 @@ public class ArbolGen {
         return valor;
     }
 
+    public ArbolGen clonar() {
+        ArbolGen clon = new ArbolGen();
+        if (raiz != null) {
+            clon.raiz = new NodoGen(raiz.getElemento(), null, null);
+            auxClone(raiz, clon.raiz);
+        }
+        return clon;
+    }
+
+    private void auxClone(NodoGen nodo1, NodoGen nodo2) {
+        //Entran dos nodo, un nodo raiz, y una copia de la raiz
+        if (nodo1 != null && nodo2 != null) {
+            //SI ambos son distintos de nulos, entonces:
+            if (nodo1.getHijoIzq() != null) {
+                //Al nodo copia de la raiz, se le asigna a su hijo izquierdo(que se inicializo en el publico con null) 
+                // un nuevo nodo con el hijo izquierdo del nodo raiz original
+                nodo2.setHijoIzq(new NodoGen(nodo1.getHijoIzq().getElemento(), null, null));
+            }
+
+            if (nodo1.getHermanoDer() != null) {
+                nodo2.setHermanoDer(new NodoGen(nodo1.getHermanoDer().getElemento(), null, null));
+            }
+            //Hace el llamado recursivo pero con los dos hijos izquierdo, del original y de la copia
+            //los cuales ya son distintos de nulos.
+            auxClone(nodo1.getHijoIzq(), nodo2.getHijoIzq());
+            auxClone(nodo1.getHermanoDer(), nodo2.getHermanoDer());
+
+        }
+    }
+
     public void vaciar() {
         raiz = null;
     }
+
+    public Lista listarPreorden() {
+        Lista valor = new Lista();
+        if (this.raiz != null) {
+            preOrdenAux(this.raiz, valor);
+        }
+        return valor;
+    }
+
+    private void preOrdenAux(NodoGen raiz, Lista lista) {
+        lista.insertar(raiz.getElemento(), lista.longitud() + 1);
+
+        NodoGen aux = raiz.getHijoIzq();
+        while (aux != null) {
+            preOrdenAux(aux, lista);
+            aux = aux.getHermanoDer();
+        }
+    }
+    
+    
 
     public Lista listarInOrden() {
         Lista salida = new Lista();
@@ -226,33 +276,6 @@ public class ArbolGen {
             }
             //Visita del nodo n
             ls.insertar(n.getElemento(), ls.longitud() + 1);
-
-            //Llamados recursivos con los otros hijos de n 
-            if (n.getHijoIzq() != null) {
-                NodoGen hijo = n.getHijoIzq().getHermanoDer();
-                while (hijo != null) {
-                    listarInordenAux(hijo, ls);
-                    hijo = hijo.getHermanoDer();
-                }
-            }
-        }
-    }
-
-    public Lista listarPreOrden() {
-        Lista salida = new Lista();
-        listarPreordenAux(raiz, salida);
-        return salida;
-    }
-
-    private void listarPreordenAux(NodoGen n, Lista ls) {
-        if (n != null) {
-            //Visita del nodo n
-            ls.insertar(n.getElemento(), ls.longitud() + 1);
-
-            //Llamado recursivo con primer hijo de n
-            if (n.getHijoIzq() != null) {
-                listarInordenAux(n.getHijoIzq(), ls);
-            }
 
             //Llamados recursivos con los otros hijos de n 
             if (n.getHijoIzq() != null) {
@@ -289,36 +312,6 @@ public class ArbolGen {
             }
         }
         return s;
-    }
-
-    public ArbolGen clonar() {
-        ArbolGen clon = new ArbolGen();
-        if (raiz != null) {
-            clon.raiz = new NodoGen(raiz.getElemento(), null, null);
-            auxClone(raiz, clon.raiz);
-        }
-        return clon;
-    }
-
-    private void auxClone(NodoGen nodo1, NodoGen nodo2) {
-        //Entran dos nodo, un nodo raiz, y una copia de la raiz
-        if (nodo1 != null && nodo2 != null) {
-            //SI ambos son distintos de nulos, entonces:
-            if (nodo1.getHijoIzq() != null) {
-                //Al nodo copia de la raiz, se le asigna a su hijo izquierdo(que se inicializo en el publico con null) 
-                // un nuevo nodo con el hijo izquierdo del nodo raiz original
-                nodo2.setHijoIzq(new NodoGen(nodo1.getHijoIzq().getElemento(), null, null));
-            }
-
-            if (nodo1.getHermanoDer() != null) {
-                nodo2.setHermanoDer(new NodoGen(nodo1.getHermanoDer().getElemento(), null, null));
-            }
-            //Hace el llamado recursivo pero con los dos hijos izquierdo, del original y de la copia
-            //los cuales ya son distintos de nulos.
-            auxClone(nodo1.getHijoIzq(), nodo2.getHijoIzq());
-            auxClone(nodo1.getHermanoDer(), nodo2.getHermanoDer());
-
-        }
     }
 
     public Lista listarPosorden() {

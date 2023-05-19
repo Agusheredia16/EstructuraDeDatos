@@ -6,6 +6,7 @@ import Lista_Dinamica.Lista;
 @author agush
  */
 public class ArbolGen {
+
     /*
     Faltan:
         postOrden():Lista
@@ -86,17 +87,36 @@ public class ArbolGen {
     }
 
     public Object padre(Object elemento) {
-        Object resultado = padreAux(elemento, this.raiz); //Va a faltar el caso especial de Raiz
+        Object resultado = null;
+        if (!esVacio()) {
+            if (!raiz.getElemento().equals(elemento)) {
+                resultado = padreAux(elemento, raiz);
+            }
+        }
         return resultado;
     }
 
     private Object padreAux(Object elemento, NodoGen nodo) {
         Object elemPadre = null;
 
-        if () {
-            
+        if (nodo.getHijoIzq() != null && nodo.getHijoIzq().getElemento().equals(elemento)) {//veo si el elemHijo es el del hijo izq
+            elemPadre = nodo.getElemento();
+        } else {//busco si alguno de sus hijos es el elemHijo (elemento)
+            NodoGen nodoAux = nodo.getHijoIzq();
+            while (elemPadre == null && nodoAux != null) {
+                if (nodoAux.getHermanoDer() != null && nodoAux.getHermanoDer().getElemento().equals(elemento)) {
+                    elemPadre = nodo.getElemento();//si alguno efectivamente lo es, listo.
+                }
+                nodoAux = nodoAux.getHermanoDer();
+            }
+            if (elemPadre == null) {//Recursivo, busco entre los hijos de los hijos hasta encontrarlo
+                nodoAux = nodo.getHijoIzq();
+                while(elemPadre == null && nodoAux != null){
+                    elemPadre = padreAux(elemento, nodoAux);
+                    nodoAux = nodoAux.getHermanoDer();
+                }
+            }
         }
-
         return elemPadre;
     }
 

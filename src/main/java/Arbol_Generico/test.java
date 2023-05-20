@@ -30,10 +30,12 @@ public class test {
         
         
         
+        //ArbolGen arb2;
+        //arb2 = arb.clonar();
+        //System.out.println(arb.equals(arb2));
         
-        
-        Lista lista = arb.listarNiveles();
-        System.out.println(lista.toString());
+        //Lista lista = arb.listarNiveles();
+        //System.out.println(lista.toString());
         
         //Lista lista = arb.listarInOrden();
         //System.out.println(lista.toString());

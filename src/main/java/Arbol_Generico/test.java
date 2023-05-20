@@ -27,25 +27,18 @@ public class test {
 
         arb.insertar("pi", "especiales");
         arb.insertar("e", "especiales");
-        
-        
-        
+
         //ArbolGen arb2;
         //arb2 = arb.clonar();
         //System.out.println(arb.equals(arb2));
-        
         //Lista lista = arb.listarNiveles();
         //System.out.println(lista.toString());
-        
-        //Lista lista = arb.listarInOrden();
-        //System.out.println(lista.toString());
-        
+        Lista lista = arb.listarInorden();
+        System.out.println(lista.toString());
         //Lista lista = arb.listarPreorden();
         //System.out.println(lista.toString());
-        
         //ArbolGen arbCopia = arb.clonar();
         //System.out.println(arbCopia.toString());
-
         //arb.nivel("asd");
         //Lista lista;
         //lista = arb.ancestros(5);

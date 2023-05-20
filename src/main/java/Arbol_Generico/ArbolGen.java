@@ -1,6 +1,8 @@
 package Arbol_Generico;
+
 import Lista_Dinamica.Lista;
 import Cola_Dinamica.Cola;
+
 /*
 @author agush
  */
@@ -303,26 +305,24 @@ public class ArbolGen {
             lista.insertar(nodo.getElemento(), lista.longitud() + 1);
         }
     }
-    
-     public Lista listarNiveles(){
+
+    public Lista listarNiveles() {
         Lista lista = new Lista();
         Cola cola = new Cola();
         cola.poner(raiz);
-        
-        while(!cola.esVacia()){
+
+        while (!cola.esVacia()) {
             NodoGen aux = (NodoGen) cola.obtenerIni();
             cola.sacar();
             lista.insertar(aux.getElemento(), lista.longitud() + 1);
             aux = aux.getHijoIzq();
-            while(aux != null){
+            while (aux != null) {
                 cola.poner(aux);
                 aux = aux.getHermanoDer();
             }
         }
         return lista;
     }
-    
-    
 
     @Override
     public String toString() {
@@ -386,6 +386,24 @@ public class ArbolGen {
                 }
             }
         }
+    }
+
+    public boolean equals(ArbolGen arb1) {
+        return equalsAux(raiz, arb1.raiz);
+    }
+
+    private boolean equalsAux(NodoGen nodo1, NodoGen nodo2) {
+        boolean rta = true;
+
+        if (nodo1 != nodo2) {
+            if (nodo1 == null || nodo2 == null || !nodo1.getElemento().equals(nodo2.getElemento())) {
+                rta = false;
+            } else {
+                rta = equalsAux(nodo1.getHijoIzq(), nodo2.getHijoIzq()) && equalsAux(nodo1.getHermanoDer(), nodo2.getHermanoDer());
+            }
+        }
+
+        return rta;
     }
 
 }

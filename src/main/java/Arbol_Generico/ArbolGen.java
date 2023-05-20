@@ -197,6 +197,8 @@ public class ArbolGen {
                 while (aux != null && !valor) {
                     if (valor || ancestrosAux(aux, elemento, lista)) {
                         valor = true;
+                    } else {
+                        valor = false;
                     }
                     aux = aux.getHermanoDer();
                 }
@@ -261,24 +263,24 @@ public class ArbolGen {
         }
     }
 
-    public Lista listarInOrden() {
+    public Lista listarInorden() {
         Lista lista = new Lista();
-        listarInordenAux(raiz, lista);
+        if (!this.esVacio()) {
+            inordenAux(lista, this.raiz);
+        }
         return lista;
+
     }
 
-    private void listarInordenAux(NodoGen nodo, Lista lista) {
+    private void inordenAux(Lista lista, NodoGen nodo) {
         if (nodo != null) {
-            if (nodo.getHijoIzq() != null) {
-                listarInordenAux(nodo.getHijoIzq(), lista);
-            }
+            inordenAux(lista, nodo.getHijoIzq());
             lista.insertar(nodo.getElemento(), lista.longitud() + 1);
-
             if (nodo.getHijoIzq() != null) {
-                NodoGen hijo = nodo.getHijoIzq().getHermanoDer();
-                while (hijo != null) {
-                    listarInordenAux(hijo, lista);
-                    hijo = hijo.getHermanoDer();
+                NodoGen temp = nodo.getHijoIzq().getHermanoDer(); // Selecciona el hermano derecho del nodo izquierdo
+                while (temp != null) {
+                    inordenAux(lista, temp);
+                    temp = temp.getHermanoDer();
                 }
             }
         }
@@ -404,6 +406,51 @@ public class ArbolGen {
         }
 
         return rta;
+    }
+
+    public int grado() {
+        int grado = -1;
+        if (!this.esVacio()) {
+            grado = gradoAux(this.raiz);
+        }
+        return grado;
+    }
+
+    private int gradoAux(NodoGen nodo) {
+        int gradoMayor = 0;
+        int gradoActual = 0;
+        int gradoHijo = 0;
+        if (nodo != null) {
+            // LLAMADOS RECURSIVOS CON LOS OTROS HIJOS DE nodo
+            if (nodo.getHijoIzq() != null) {
+                NodoGen hijo = nodo.getHijoIzq();
+                while (hijo != null) {
+                    gradoActual++;
+                    gradoHijo = gradoAux(hijo);
+                    if (gradoHijo > gradoMayor) {
+                        gradoMayor = gradoHijo;
+                    }
+                    hijo = hijo.getHermanoDer();
+
+                }
+                if (gradoActual > gradoMayor) {
+                    gradoMayor = gradoActual;
+                }
+            }
+        }
+        return gradoMayor;
+    }
+
+    public int gradoSubarbol(Object elem) {
+        int grado = -1;
+        if (!this.esVacio()) {
+            NodoGen buscado = buscarNodo(this.raiz, elem);
+            if (buscado != null) {
+                grado = gradoAux(buscado);
+            }
+
+        }
+        return grado;
     }
 
 }

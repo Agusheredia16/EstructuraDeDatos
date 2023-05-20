@@ -1,7 +1,6 @@
 package Arbol_Generico;
-
 import Lista_Dinamica.Lista;
-
+import Cola_Dinamica.Cola;
 /*
 @author agush
  */
@@ -259,34 +258,71 @@ public class ArbolGen {
             aux = aux.getHermanoDer();
         }
     }
-    
-    
 
     public Lista listarInOrden() {
-        Lista salida = new Lista();
-        listarInordenAux(raiz, salida);
-        return salida;
+        Lista lista = new Lista();
+        listarInordenAux(raiz, lista);
+        return lista;
     }
 
-    private void listarInordenAux(NodoGen n, Lista ls) {
-        if (n != null) {
-            //Llamado recursivo con primer hijo de n
-            if (n.getHijoIzq() != null) {
-                listarInordenAux(n.getHijoIzq(), ls);
+    private void listarInordenAux(NodoGen nodo, Lista lista) {
+        if (nodo != null) {
+            if (nodo.getHijoIzq() != null) {
+                listarInordenAux(nodo.getHijoIzq(), lista);
             }
-            //Visita del nodo n
-            ls.insertar(n.getElemento(), ls.longitud() + 1);
+            lista.insertar(nodo.getElemento(), lista.longitud() + 1);
 
-            //Llamados recursivos con los otros hijos de n 
-            if (n.getHijoIzq() != null) {
-                NodoGen hijo = n.getHijoIzq().getHermanoDer();
+            if (nodo.getHijoIzq() != null) {
+                NodoGen hijo = nodo.getHijoIzq().getHermanoDer();
                 while (hijo != null) {
-                    listarInordenAux(hijo, ls);
+                    listarInordenAux(hijo, lista);
                     hijo = hijo.getHermanoDer();
                 }
             }
         }
     }
+
+    public Lista listarPosOrden() {
+        Lista lista = new Lista();
+        if (!this.esVacio()) {
+            posOrdenAux(lista, this.raiz);
+        }
+        return lista;
+    }
+
+    private void posOrdenAux(Lista lista, NodoGen nodo) {
+        if (nodo != null) {
+            posOrdenAux(lista, nodo.getHijoIzq());
+            if (nodo.getHijoIzq() != null) {
+                NodoGen temp = nodo.getHijoIzq().getHermanoDer();
+                while (temp != null) {
+                    posOrdenAux(lista, temp);
+                    temp = temp.getHermanoDer();
+                }
+            }
+            lista.insertar(nodo.getElemento(), lista.longitud() + 1);
+        }
+    }
+    
+     public Lista listarNiveles(){
+        Lista lista = new Lista();
+        Cola cola = new Cola();
+        cola.poner(raiz);
+        
+        while(!cola.esVacia()){
+            NodoGen aux = (NodoGen) cola.obtenerIni();
+            cola.sacar();
+            lista.insertar(aux.getElemento(), lista.longitud() + 1);
+            aux = aux.getHijoIzq();
+            while(aux != null){
+                cola.poner(aux);
+                aux = aux.getHermanoDer();
+            }
+        }
+        return lista;
+    }
+    
+    
 
     @Override
     public String toString() {
@@ -312,28 +348,6 @@ public class ArbolGen {
             }
         }
         return s;
-    }
-
-    public Lista listarPosorden() {
-        Lista lista = new Lista();
-        if (!this.esVacio()) {
-            posordenAux(lista, this.raiz);
-        }
-        return lista;
-    }
-
-    private void posordenAux(Lista lista, NodoGen nodo) {
-        if (nodo != null) {
-            posordenAux(lista, nodo.getHijoIzq());
-            if (nodo.getHijoIzq() != null) {
-                NodoGen temp = nodo.getHijoIzq().getHermanoDer(); // Selecciona el hermano derecho del nodo izquierdo
-                while (temp != null) {
-                    posordenAux(lista, temp);
-                    temp = temp.getHermanoDer();
-                }
-            }
-            lista.insertar(nodo.getElemento(), lista.longitud() + 1);
-        }
     }
 
     public boolean sonFrontera(Lista lista) {

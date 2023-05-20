@@ -32,6 +32,12 @@ public class test {
         
         
         
+        Lista lista = arb.listarNiveles();
+        System.out.println(lista.toString());
+        
+        //Lista lista = arb.listarInOrden();
+        //System.out.println(lista.toString());
+        
         //Lista lista = arb.listarPreorden();
         //System.out.println(lista.toString());
         

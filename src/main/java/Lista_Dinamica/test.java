@@ -14,7 +14,7 @@ public class test {
         System.out.println(testLista.insertar("c", 3));
         System.out.println(testLista.insertar("d", 4));
 
-        System.out.println(testLista.obtenerMultiplos(2));
+        System.out.println(testLista.longitud());
     }
 
 }

@@ -27,14 +27,22 @@ public class test {
 
         arb.insertar("pi", "especiales");
         arb.insertar("e", "especiales");
+        
+        Lista lis = new Lista();
+        
+        lis.insertar("numeros",1);
+        lis.insertar("impares",2);
+        lis.insertar(3,3);
+        
+        System.out.println(arb.verificarPatron(lis));
 
         //ArbolGen arb2;
         //arb2 = arb.clonar();
         //System.out.println(arb.equals(arb2));
         //Lista lista = arb.listarNiveles();
         //System.out.println(lista.toString());
-        Lista lista = arb.listarInorden();
-        System.out.println(lista.toString());
+        //Lista lista = arb.listarInorden(); ................
+        //System.out.println(lista.toString()); .............
         //Lista lista = arb.listarPreorden();
         //System.out.println(lista.toString());
         //ArbolGen arbCopia = arb.clonar();

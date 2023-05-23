@@ -453,4 +453,44 @@ public class ArbolGen {
         return grado;
     }
 
+    public boolean verificarPatron(Lista listaPatron) {
+        boolean resultado = false;
+
+        if (raiz.getElemento().equals(listaPatron.recuperar(1))) {
+            System.out.println("holi");
+            resultado = verificarPatronAux(raiz, listaPatron, 2);
+            System.out.println("bye");
+        }
+        return resultado;
+    }
+
+    private boolean verificarPatronAux(NodoGen nodo, Lista lista, int pos) {
+        boolean resultado = false;
+
+        if (lista.longitud() >= pos) {
+            if (nodo.getHijoIzq() != null && nodo.getHijoIzq().getElemento().equals(lista.recuperar(pos))) {
+                if (lista.recuperar(pos + 1) == null && nodo.getHijoIzq() == null) {
+                    resultado = true;
+                } else {
+                    resultado = verificarPatronAux(nodo.getHijoIzq(), lista, pos + 1);
+                }
+            } else if (nodo.getHijoIzq() != null) {
+                NodoGen nodoAux = nodo.getHijoIzq();
+                while (nodoAux != null && resultado != true) {
+                    if (nodoAux.getHermanoDer() != null && nodoAux.getHermanoDer().getElemento().equals(lista.recuperar(pos))) {
+                        if (lista.recuperar(pos + 1) == null && nodoAux.getHermanoDer().getHijoIzq() == null) {
+                            resultado = true;
+                        } else {
+                            resultado = verificarPatronAux(nodoAux.getHermanoDer(), lista, pos + 1);
+                        }
+                    }
+                    nodoAux = nodoAux.getHermanoDer();
+                }
+            }
+
+        }
+
+        return resultado;
+    }
+
 }

@@ -492,14 +492,11 @@ public class ArbolGen {
 
         return resultado;
     }
-    
-    public Lista listaQueJustificaLaAltura(){
+
+    public Lista listaQueJustificaLaAltura() {
         Lista lista = new Lista();
-        
-        
+
         return lista;
     }
-    
-    
 
 }

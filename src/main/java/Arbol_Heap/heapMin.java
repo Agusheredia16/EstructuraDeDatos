@@ -7,13 +7,40 @@ public class HeapMin {
 
     private Comparable[] heap;
     private int ultimo;
-    private int TAMANIO = 20;
+    private int TAMANIO = 15;
 
     public HeapMin() {
         this.heap = new Comparable[TAMANIO];
         this.ultimo = 0; // La posicion 0 nunca se usa
     }
 
+    public boolean insertar(int elemento){
+        boolean exito = false;
+        if (ultimo == 0) {
+            this.heap[1] = elemento;
+            ultimo = 1;
+            exito = true;
+        } else if(ultimo < TAMANIO){
+            exito = insertarAux(elemento);
+        }
+        return exito;        
+    }
+    
+    public boolean insertarAux(int elemento){
+        boolean exito = true;
+        this.heap[ultimo] = elemento;
+        int aux = ultimo;
+        while(){
+            
+            if (this.heap[aux] > this.heap[aux / 2]) {
+                
+            }
+            
+        }
+        return exito;        
+    }
+    
+    
     public boolean eliminarCima() {
         boolean exito;
 

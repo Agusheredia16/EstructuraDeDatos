@@ -38,6 +38,7 @@ public class HeapMin {
             aux = aux / 2;
 
         }
+        ultimo = ultimo++;
         return true;
     }
 

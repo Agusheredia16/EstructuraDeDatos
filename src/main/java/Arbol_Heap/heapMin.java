@@ -14,33 +14,33 @@ public class HeapMin {
         this.ultimo = 0; // La posicion 0 nunca se usa
     }
 
-    public boolean insertar(int elemento){
+    public boolean insertar(int elemento) {
         boolean exito = false;
         if (ultimo == 0) {
+            //Si no tiene elementos, lo pone en la raiz
             this.heap[1] = elemento;
             ultimo = 1;
             exito = true;
-        } else if(ultimo < TAMANIO){
+        } else if (ultimo < TAMANIO) {
+            //Si hay espacio intenta ponerlo, si no devuelve false
             exito = insertarAux(elemento);
         }
-        return exito;        
+        return exito;
     }
-    
-    public boolean insertarAux(int elemento){
-        boolean exito = true;
+
+    public boolean insertarAux(int elemento) {
         this.heap[ultimo] = elemento;
         int aux = ultimo;
-        while(){
-            
-            if (this.heap[aux] > this.heap[aux / 2]) {
-                
-            }
-            
+        while (this.heap[aux].compareTo(this.heap[aux / 2]) < 0) {
+
+            this.heap[aux] = this.heap[aux / 2];
+            this.heap[aux / 2] = elemento;
+            aux = aux / 2;
+
         }
-        return exito;        
+        return true;
     }
-    
-    
+
     public boolean eliminarCima() {
         boolean exito;
 
@@ -95,8 +95,4 @@ public class HeapMin {
 
     }
 
-    
-    
-    
-    
 }

@@ -5,7 +5,7 @@ package Arbol_Heap;
  */
 public class HeapMin {
 
-    private Comparable[] heap;
+    public Comparable[] heap;
     private int ultimo;
     private int TAMANIO = 15;
 
@@ -14,32 +14,32 @@ public class HeapMin {
         this.ultimo = 0; // La posicion 0 nunca se usa
     }
 
-    public boolean insertar(int elemento) {
+    public boolean insertar(Comparable elemento) {
         boolean exito = false;
-        if (ultimo == 0) {
-            //Si no tiene elementos, lo pone en la raiz
-            this.heap[1] = elemento;
-            ultimo = 1;
+
+        if (this.ultimo == 0) {
             exito = true;
-        } else if (ultimo < TAMANIO) {
-            //Si hay espacio intenta ponerlo, si no devuelve false
-            exito = insertarAux(elemento);
+            this.heap[1] = elemento;
+            this.ultimo++;
+        } else if (this.ultimo < this.TAMANIO) {
+            hacerSubir(elemento);
+            this.ultimo++;
+            exito = true;
         }
         return exito;
     }
 
-    public boolean insertarAux(int elemento) {
-        this.heap[ultimo] = elemento;
-        int aux = ultimo;
-        while (this.heap[aux].compareTo(this.heap[aux / 2]) < 0) {
+    private void hacerSubir(Comparable elemento) {
+        int aux = this.ultimo + 1;
+        this.heap[aux] = elemento;
 
+        while (this.heap[aux / 2] != null && this.heap[aux].compareTo(this.heap[aux / 2]) < 0) {
             this.heap[aux] = this.heap[aux / 2];
             this.heap[aux / 2] = elemento;
             aux = aux / 2;
-
         }
-        ultimo = ultimo++;
-        return true;
+
+
     }
 
     public boolean eliminarCima() {

@@ -6,18 +6,24 @@ package Arbol_Heap;
 public class test {
 
     public static void main(String[] args) {
-        int arr[] = new int[5];
 
-        arr[1] = 1;
-        arr[2] = 2;
-        arr[3] = 3;
-        arr[4] = 4;
-        arr[0] = 0;
+        HeapMin arb = new HeapMin();
+        Comparable a = 2;
+        Comparable b = 5;
+        Comparable c = 10;
 
-        int b = arr[1];
-        System.out.println(b);
+        System.out.println(arb.insertar(a));
+        System.out.println(arb.insertar(b));
+        System.out.println(arb.insertar(c));
 
-        System.out.println(arr[4]/arr[2]);
+
+        System.out.println(arb.heap[0]);
+        System.out.println(arb.heap[1]);
+        System.out.println(arb.heap[2]);
+        System.out.println(arb.heap[3]);
+        System.out.println(arb.heap[4]);
+
+
     }
 
 }

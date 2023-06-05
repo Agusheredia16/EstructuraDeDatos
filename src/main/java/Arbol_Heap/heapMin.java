@@ -5,7 +5,7 @@ package Arbol_Heap;
  */
 public class HeapMin {
 
-    public Comparable[] heap;
+    private Comparable[] heap;
     private int ultimo;
     private int TAMANIO = 15;
 
@@ -38,7 +38,6 @@ public class HeapMin {
             this.heap[aux / 2] = elemento;
             aux = aux / 2;
         }
-
 
     }
 
@@ -96,4 +95,19 @@ public class HeapMin {
 
     }
 
+    public boolean esVacio() {
+        boolean resultado = true;
+        if (this.heap[ultimo] != null) {
+            resultado = false;
+        }
+        return resultado;
+    }
+
+    public Comparable recureparCima() {
+        Comparable resultado = null;
+        if (!esVacio()) {
+            resultado = this.heap[1];
+        }
+        return resultado;
+    }
 }

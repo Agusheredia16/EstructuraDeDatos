@@ -11,6 +11,34 @@ public class ArbolBB {
         this.raiz = null;
     }
 
+    public boolean pertenece(Comparable elemento) {
+        boolean resultado = false;
+        if (this.raiz != null) {
+            if (elemento.compareTo(this.raiz.getElemento()) == 0) {
+                resultado = true;
+            } else {
+                resultado = perteneceAux(this.raiz, elemento);
+            }
+        }
+        return resultado;
+    }
+
+    private boolean perteneceAux(NodoABB nodo, Comparable elemento) {
+        boolean resultado = false;
+        if (nodo != null) {
+            int comparacion = elemento.compareTo(nodo.getElemento());
+            if (comparacion == 0) {
+                resultado = true;
+            } else if (comparacion < 0) {
+                resultado = perteneceAux(nodo.getHijoIzq(), elemento);
+            } else if (comparacion > 0) {
+                resultado = perteneceAux(nodo.getHijoDer(), elemento);
+            }
+        }
+
+        return resultado;
+    }
+
     public boolean insertar(Comparable elemento) {
         boolean exito = true;
         if (this.raiz == null) {
@@ -36,7 +64,7 @@ public class ArbolBB {
             } else {
                 nodo.setHijoIzq(new NodoABB(elemento));
             }
-        } else if(nodo.getHijoDer() != null) {
+        } else if (nodo.getHijoDer() != null) {
             //Elemento mayor
             //Si HD baja a la derecha, sino agrega elemento
             exito = insertarAux(nodo.getHijoDer(), elemento);

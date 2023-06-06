@@ -73,5 +73,22 @@ public class ArbolBB {
         }
         return exito;
     }
+    
+    public boolean eliminar(Comparable elemento){
+        //Este modulo encuentra el nodo a eliminar, luego llama a otro modulo para realizar la operacion
+        NodoABB aDeletear = this.raiz;
+        boolean exito = false;
+        if (aDeletear != null) {
+            while(aDeletear != null && elemento.compareTo(aDeletear.getElemento()) != 0){
+                
+                
+                
+                
+            }
+            
+            
+        }
+        return exito;
+    }
 
 }

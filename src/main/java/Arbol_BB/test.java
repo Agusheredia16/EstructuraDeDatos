@@ -9,13 +9,16 @@ public class test {
 
         ArbolBB arb = new ArbolBB();
 
-        Comparable a = 1;
-        Comparable b = 2;
-        Comparable c = 3;
+        Comparable a = 12;
+        Comparable b = 7;
+        Comparable c = 15;
         Comparable d = 4;
-        Comparable e = 5;
-        Comparable f = 6;
-        Comparable g = 7;
+        Comparable e = 9;
+        Comparable f = 13;
+        Comparable g = 16;
+        Comparable h = 10;
+        Comparable i = 14;
+        
 
         arb.insertar(a);
         arb.insertar(b);
@@ -24,9 +27,12 @@ public class test {
         arb.insertar(e);
         arb.insertar(f);
         arb.insertar(g);
+        arb.insertar(h);
+        arb.insertar(i);
+
         
-        System.out.println(arb.pertenece(1));
-        System.out.println(arb.pertenece(0));
+        System.out.println(arb.toString());
+
     }
 
 }

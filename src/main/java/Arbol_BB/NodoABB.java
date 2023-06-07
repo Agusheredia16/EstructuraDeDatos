@@ -12,10 +12,10 @@ public class NodoABB {
         this.hijoIzq = null;
         this.hijoDer = null;
     }
-    public NodoABB(Comparable elemento, NodoABB hijoIzq, NodoABB hijoDer){
-        this.elemento = elemento;
-        this.hijoIzq = hijoIzq;
-        this.hijoDer = hijoDer;
+    public NodoABB(){
+        this.elemento = null;
+        this.hijoIzq = null;
+        this.hijoDer = null;
     }
     
     public Comparable getElemento(){

@@ -31,7 +31,7 @@ public class test {
         arb.insertar(i);
 
         
-        System.out.println(arb.toString());
+        System.out.println(arb.eliminar(4));
 
     }
 

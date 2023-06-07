@@ -1,4 +1,5 @@
 package Lista_Dinamica;
+
 /*
 @author agush
  */
@@ -119,28 +120,34 @@ public class Lista {
     }
 
     @Override
-    public String toString() {
-        String texto = "[";
-        int i = 1;
-        while (i < longitud()) {
-            texto = texto + recuperar(i) + ", ";
-            i++;
+    public String toString(){
+        String retorno = "Lista Vacia";
+        //evaluamos que la lista no este vacia
+        if(this.cabecera != null){
+            retorno = "[";
+            Nodo aux = this.cabecera;
+            
+            while(aux != null){
+                retorno = retorno + aux.getElemento().toString();
+                if(aux.getEnlace() != null){
+                    retorno += ",";
+                }
+                aux = aux.getEnlace();
+            }
+            
+            retorno += "]";
         }
-        texto = texto + recuperar(i) + "]";
-        return texto;
+        return retorno;
     }
-    
-    
-    
+
     //Modulos de parciales
-    
-    public Lista obtenerMultiplos(int num){
+    public Lista obtenerMultiplos(int num) {
         //Ejercicio de Simulacro de parcial. INCOMPLETO
-        
+
         Lista listaMult = new Lista();
         Nodo aux = cabecera;
         int contador = 1;
-        while(aux != null){
+        while (aux != null) {
             if (contador % num == 0) {
                 if (listaMult.cabecera == null) {
                     listaMult.cabecera = aux;
@@ -153,14 +160,13 @@ public class Lista {
         }
         return listaMult;
     }
-    
-    
-    public void agregarElem(Object nuevo, int x){
-        
+
+    public void agregarElem(Object nuevo, int x) {
+
         Nodo aux = this.cabecera;
-        
-        while(aux != null){
-            
+
+        while (aux != null) {
+
         }
     }
 }

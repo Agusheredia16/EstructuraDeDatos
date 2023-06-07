@@ -1,5 +1,8 @@
 package Arbol_BB;
 
+import Lista_Dinamica.Lista;
+import static java.lang.System.exit;
+
 /*
 @author agush
  */
@@ -178,22 +181,44 @@ public class ArbolBB {
 
     private void eliminarC3(NodoABB aDeletear) {
         //HP: Hijo del nodo padre, a eliminar
-        
+
         Comparable aux = buscaCandidatoXIzq(aDeletear.getHijoIzq());
         eliminar(aux);
         aDeletear.setElemento(aux);
-        
-        
+
     }
-    
-    private Comparable buscaCandidatoXIzq(NodoABB nodo){
+
+    private Comparable buscaCandidatoXIzq(NodoABB nodo) {
         //Este modulo busca un candidato a reemplazar, por la izquierda
         Comparable elemento = null;
-        while(nodo != null){
+        while (nodo != null) {
             elemento = nodo.getElemento();
             nodo = nodo.getHijoDer();
         }
         return elemento;
+    }
+
+    public boolean esVacio() {
+        return this.raiz == null;
+    }
+
+    public Lista listar() {
+        Lista lista = new Lista();
+
+        if (this.raiz != null) {
+            listarAux(this.raiz, lista);
+        }
+
+        return lista;
+    }
+
+    private void listarAux(NodoABB nodo, Lista lista) {
+        //recorremos en preorden
+        if (nodo != null) {
+            listarAux(nodo.getHijoIzq(), lista);
+            lista.insertar(nodo.getElemento(), lista.longitud() + 1);
+            listarAux(nodo.getHijoDer(), lista);
+        }
     }
 
     @Override

@@ -1,5 +1,5 @@
 package Arbol_BB;
-
+import Lista_Dinamica.Lista;
 /*
 @author agush
  */
@@ -32,9 +32,15 @@ public class test {
         arb.insertar(i);
         arb.insertar(j);
 
-        System.out.println(arb.eliminar(b));
-        System.out.println(arb.toString());
+        //System.out.println(arb.eliminar(b));
+        //System.out.println(arb.toString());
 
+        Lista lista = new Lista();
+
+        lista = arb.listar();
+        
+        System.out.println(lista.toString());
+        
     }
 
 }

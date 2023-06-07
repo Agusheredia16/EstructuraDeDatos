@@ -112,52 +112,93 @@ public class ArbolBB {
 
     private void eliminarAux(NodoABB nodo, NodoABB padre, int caso) {
         //Este modulo le da los datos que sean necesarios a otro modulo para realizar la eliminacion
-        
         char hijoP = 'D';
+        char hijoH = 'D';
         //Este if pregunta que hijo del nodo padre hay que eliminar
-        if (padre.getHijoIzq().getElemento().compareTo(nodo.getElemento()) == 0) {
+        if (padre.getHijoIzq() != null && padre.getHijoIzq().getElemento().compareTo(nodo.getElemento()) == 0) {
             hijoP = 'I';
         }
-        
+
         switch (caso) {
             case 1:
                 eliminarC1(hijoP, padre);
                 break;
-            case 2:
 
-                char hijoH = 'D';
+            case 2:
+                //Este if pregunta que hijo del nodo hay que conectar con su padre
                 if (nodo.getHijoIzq() != null) {
                     hijoH = 'I';
                 }
-                
                 eliminarC2(hijoP, nodo, padre, hijoH);
-
                 break;
-            case 3:
 
+            case 3:
+                if (nodo.getHijoIzq().getElemento().compareTo(nodo.getHijoDer().getElemento()) > 0) {
+                    hijoH = 'I';
+                }
+
+                eliminarC3(nodo);
                 break;
         }
 
     }
 
     private void eliminarC1(char hijo, NodoABB padre) {
-        if (hijo == 'I') {
-            padre.setHijoIzq(null);
-        } else {
-            padre.setHijoDer(null);
+        if (padre.getElemento() != null) {
+            if (hijo == 'I') {
+                padre.setHijoIzq(null);
+            } else {
+                padre.setHijoDer(null);
+            }
+        } else { //Caso especial, eliminar raiz
+            this.raiz = null;
         }
+
+    }
+
+    private void eliminarC2(char HP, NodoABB aDeletear, NodoABB nodoPadre, char HH) {
+        //HP: Hijo del padre a eliminar
+        //HH: Hijo del hijo a reemplazar
+
+        NodoABB aux = aDeletear.getHijoIzq();
+        if (HH == 'D') {
+            aux = aDeletear.getHijoDer();
+        }
+        if (nodoPadre.getElemento() != null) { //Caso especial, eliminar raiz
+            if (HP == 'I') {
+                nodoPadre.setHijoIzq(aux);
+            } else {
+                nodoPadre.setHijoDer(aux);
+            }
+        } else {
+            this.raiz = aux;
+        }
+
+    }
+
+    private void eliminarC3(NodoABB aDeletear) {
+        //HP: Hijo del nodo padre, a eliminar
+        
+        Comparable aux = buscaCandidatoXIzq(aDeletear.getHijoIzq());
+        eliminar(aux);
+        aDeletear.setElemento(aux);
+        
+        
     }
     
-    private void eliminarC2(char HP, NodoABB aDeletear, NodoABB nodoPadre, char HH){
-        //HP: Hijo del padre a eliminar. HH: Hijo del hijo a reemplazar
-        
-        
-        
+    private Comparable buscaCandidatoXIzq(NodoABB nodo){
+        //Este modulo busca un candidato a reemplazar, por la izquierda
+        Comparable elemento = null;
+        while(nodo != null){
+            elemento = nodo.getElemento();
+            nodo = nodo.getHijoDer();
+        }
+        return elemento;
     }
 
     @Override
     public String toString() {
-        String texto = "Error";
+        String texto = "Arbol vacio";
         if (this.raiz != null) {
             texto = "";
             NodoABB nodo = this.raiz;

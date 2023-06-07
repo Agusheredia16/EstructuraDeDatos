@@ -18,6 +18,7 @@ public class test {
         Comparable g = 16;
         Comparable h = 10;
         Comparable i = 14;
+        Comparable j = 2;
         
 
         arb.insertar(a);
@@ -29,9 +30,10 @@ public class test {
         arb.insertar(g);
         arb.insertar(h);
         arb.insertar(i);
+        arb.insertar(j);
 
-        
-        System.out.println(arb.eliminar(4));
+        System.out.println(arb.eliminar(b));
+        System.out.println(arb.toString());
 
     }
 

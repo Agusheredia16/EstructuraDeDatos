@@ -37,7 +37,7 @@ public class test {
 
         Lista lista = new Lista();
 
-        lista = arb.listar();
+        lista = arb.listarRango(2,15);
         
         System.out.println(lista.toString());
         

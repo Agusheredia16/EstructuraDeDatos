@@ -221,6 +221,81 @@ public class ArbolBB {
         }
     }
 
+    public Lista listarRango(Comparable minimo, Comparable maximo) {
+        //vamos a buscar en el arbol los elementos en el rango
+        Lista listaRango = new Lista();
+
+        if (minimo.compareTo(maximo) <= 0) {
+            //en caso de que minimos sea menor o igual a maximo
+            //se ejecuta el algoritmo de comparacion
+            if (this.raiz != null) {
+                listaRangoAux(this.raiz, listaRango, minimo, maximo);
+            }
+        }
+        return listaRango;
+    }
+
+    private void listaRangoAux(NodoABB nodo, Lista lista, Comparable minimo, Comparable maximo) {
+        //si el nodo esta entre los maximos minimos
+        if (nodo.getElemento().compareTo(minimo) >= 0 && nodo.getElemento().compareTo(maximo) <= 0) {
+            //hacemos lo mismo con nuetro HI que es menor al nodo
+            if (nodo.getHijoIzq() != null) {
+                //tenemos un HI por lo cual vamos a recorrerlo de la misma forma
+                listaRangoAux(nodo.getHijoIzq(), lista, minimo, maximo);
+            }
+            //insertamos el elemento actual en la lista
+            lista.insertar(nodo.getElemento(), lista.longitud() + 1);
+            //hacemos los mismo con el HD que es el mayor del nodo actual
+            if (nodo.getHijoDer() != null) {
+                //tenemos un HD y vamos a recorrerlo
+                listaRangoAux(nodo.getHijoDer(), lista, minimo, maximo);
+            }
+        } else {
+            //en caso de que no este entre el rango
+            if (nodo.getHijoDer() != null && nodo.getElemento().compareTo(minimo) < 0) {
+                //en caso de que el nodo sea manor al valor minimo busco por el lado derecho
+                listaRangoAux(nodo.getHijoDer(), lista, minimo, maximo);
+            } else {
+                //en caso de se sea mayor al maximo buscamos por el lado izquierdo
+                if (nodo.getHijoIzq() != null && nodo.getElemento().compareTo(maximo) > 0) {
+                    listaRangoAux(nodo.getHijoIzq(), lista, minimo, maximo);
+                }
+            }
+        }
+    }
+    
+    public Comparable minimoElem() {
+        Comparable minimo = null;
+        if (this.raiz != null) {
+            minimo = candidatoB(this.raiz).getElemento();
+        }
+        return minimo;
+    }
+    
+    public Comparable maximoElem() {
+        Comparable minimo = null;
+        if (this.raiz != null) {
+            minimo = candidatoA(this.raiz).getElemento();
+        }
+        return minimo;
+    }
+    
+    private NodoABB candidatoA(NodoABB raiz) {
+        NodoABB aux = raiz;
+        while (aux.getHijoDer() != null) {
+            aux = aux.getHijoDer();
+        }
+        return aux;
+    }
+
+    private NodoABB candidatoB(NodoABB raiz) {
+        NodoABB aux = raiz;
+        while (aux.getHijoIzq() != null) {
+            aux = aux.getHijoIzq();
+        }
+        return aux;
+    }
+
     @Override
     public String toString() {
         String texto = "Arbol vacio";
